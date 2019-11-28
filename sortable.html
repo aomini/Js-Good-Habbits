@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>	sorting</title>
+</head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<style>
+	ul{
+		list-style: none;
+		padding: 0;
+	}
+	li{
+		padding: 10px;
+		background: #e8e8e8;
+		margin: 10px;
+	}
+	.ui-sortable-helper{
+		transform: rotate(1.4deg);
+	}
+	.ui-sortable-holder{
+		border: 1px dashed red;
+		background: white;
+		margin:10px;
+	}
+
+	table tr td{
+		background-color: #f9f9f9;
+	}
+
+</style>
+<body>
+	<table cellpadding="10px">
+		<th class="ui-state-disabled">sn</th>
+		<th class="ui-state-disabled">project</th>
+		<th class="ui-state-disabled">code</th>
+		<tr class="grouper ui-state-disabled" id="123123">
+			<td colspan="3">High</td>
+		</tr>
+		<tr class="123123">
+			<td>1</td>
+			<td>fgp</td>
+			<td>here it is</td>
+		</tr>
+		<tr class="123123">
+			<td>1</td>
+			<td>fgp</td>
+			<td>here it is</td>
+		</tr>
+		<tr class="grouper ui-state-disabled" id="456">
+			<td colspan="3">medium</td>
+		</tr>
+		<tr class="456">
+			<td>1</td>
+			<td>fgp</td>
+			<td>here it is</td>
+		</tr>
+		<tr class="456">
+			<td>1</td>
+			<td>fgp</td>
+			<td>here it is</td>
+		</tr>
+	</table>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+	<script>
+			
+		// $('ul').sortable({
+		// 	cursor: 'move',
+		// 	items: '>li',
+		// 	connectWith: 'ul',
+		// 	opacity: 0.8,
+		// 	placeholder: 'sortable-holder',
+		// 	forcePlaceholderSize: true,
+		// 	revert:100,
+		// 	scroll:true,
+		// 	tolerance: "pointer",
+		// 	beforeStop: function(event, ui){
+		// 		console.log(ui)
+		// 	}
+		// });
+
+		$('table').sortable({
+			items : 'tr',
+			cursor: 'move',
+			opacity: 1,
+			containment: 'table',
+			cancel: ".ui-state-disabled",
+			forcePlaceholderSize: true,
+			revert: 100,
+			placeholder: 'ui-sortable-holder',
+			scroll:true,
+			tolerance: "pointer",			
+			stop: function(event, ui){
+				if(!$(ui.item).prevAll().hasClass('grouper')){
+					$(this).sortable('cancel')
+				}else{
+					//Send ajax to update the priority of currently sorted row
+				}
+			}
+		});
+		
+	</script>
+</body>
+
+</html>
